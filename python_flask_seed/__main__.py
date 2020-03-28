@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, make_response, request
 
-app = Flask('python-flask-seed')
+application = Flask('python-flask-seed')
 
 
-@app.route('/welcome', methods=['POST'])
+@application.route('/welcome', methods=['POST'])
 def welcome():
     content = request.get_json(silent=True, force=True)
 
@@ -17,17 +17,17 @@ def welcome():
         return make_response(jsonify(response), 400)
 
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def hello():
     response = {'message': 'Hello from flask!'}
     return make_response(jsonify(response), 200)
 
 
-@app.route('/<path:path>', methods=['GET', 'POST'])
+@application.route('/<path:path>', methods=['GET', 'POST'])
 def not_found(path):
     response = {'error': 'route not found'}
     return make_response(jsonify(response), 404)
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    application.run(host='0.0.0.0', port=5000)
